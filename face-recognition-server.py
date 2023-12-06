@@ -11,7 +11,7 @@ import websockets
 # from flask_mysqldb import MySQL
 from datetime import datetime
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
 images_path = 'images'
 images = []
