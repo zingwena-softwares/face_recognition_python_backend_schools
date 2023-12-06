@@ -83,6 +83,6 @@ def recognize_face(message):
 if __name__ == '__main__':
     loop = asyncio.new_event_loop()
     loop.run_until_complete(
-        websockets.serve(websocket_handler, "195.35.9.96", 8765)
+        websockets.serve(websocket_handler, "", 8765)
     )
     loop.run_forever()
