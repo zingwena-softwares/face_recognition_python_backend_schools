@@ -22,7 +22,7 @@ classNames = []
 # app.config['MYSQL_DB'] = 'hrm'
 # app.app_context().push()
 
-mysql = MySQL(app)
+# mysql = MySQL(app)
 
 myList = os.listdir(images_path)
 for cl in myList:
