@@ -7,8 +7,8 @@ import cv2
 import face_recognition
 import numpy as np
 import websockets
-from flask import Flask
-from flask_mysqldb import MySQL
+# from flask import Flask
+# from flask_mysqldb import MySQL
 from datetime import datetime
 
 app = Flask(__name__)
@@ -16,11 +16,11 @@ app = Flask(__name__)
 images_path = 'images'
 images = []
 classNames = []
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'hrm'
-app.app_context().push()
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = ''
+# app.config['MYSQL_DB'] = 'hrm'
+# app.app_context().push()
 
 mysql = MySQL(app)
 
@@ -63,14 +63,14 @@ def recognize_face(message):
         results = face_recognition.compare_faces(encodeListKnown, unknown_face_encoding)
         face_distance = face_recognition.face_distance(encodeListKnown, unknown_face_encoding)
         best_match_index = np.argmin(face_distance)
-        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        # cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         if results[best_match_index]:
             name = classNames[best_match_index]
-            cursor.execute('INSERT INTO attendances (`company_id`,`user_id`,`date`, `check_in`, `check_out`) VALUES ('
-                           '%s, %s, %s, %s, %s)', (
-                               1, 2, datetime.today().strftime('%Y-%m-%d'), datetime.today().strftime('%Y-%m-%d'),
-                               datetime.today().strftime('%Y-%m-%d')))
-            mysql.connection.commit()
+            # cursor.execute('INSERT INTO attendances (`company_id`,`user_id`,`date`, `check_in`, `check_out`) VALUES ('
+            #                '%s, %s, %s, %s, %s)', (
+            #                    1, 2, datetime.today().strftime('%Y-%m-%d'), datetime.today().strftime('%Y-%m-%d'),
+            #                    datetime.today().strftime('%Y-%m-%d')))
+            # mysql.connection.commit()
             return {"status": True, "message": "Welcome ," + name, "data": 2}
         else:
             return {"status": True, "message": "Recognition unsuccessful", "data": 1}
